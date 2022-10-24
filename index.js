@@ -9,13 +9,16 @@ const hbs = exphbs.create({
   defaultLayout: "main",
   extname: "hbs",
 });
-
+// Handlebars
 app.engine("hbs", hbs.engine);
 app.set("view engine", "hbs");
 app.set("views", "views");
+
 // fiylni static qilish
 app.use(express.static("public"));
 
+// forma bilan ishlash uchun yoziladi
+app.use(express.urlencoded({extended: true}))
 // Routes
 app.use("/", homeRoutes);
 app.use("/notebooks", notebooksRoutes)
