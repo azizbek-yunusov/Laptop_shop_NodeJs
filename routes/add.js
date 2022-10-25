@@ -7,10 +7,13 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  // new notebook yangi constructor
-  const notebook = new Notebook(req.body.title, req.body.price, req.body.img);
+  const notebook = new Notebook(
+    req.body.title,
+    req.body.price,
+    req.body.img,
+    req.body.descr
+  );
   await notebook.save();
-  console.log(req.body);
   res.redirect("/notebooks");
 });
 

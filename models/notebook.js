@@ -3,11 +3,12 @@ const fs = require("fs");
 const path = require("path");
 
 class Notebook {
-  constructor(title, price, img) {
+  constructor(title, price, img, descr) {
     this.id = uuidv4();
     this.title = title;
     this.price = price;
     this.img = img;
+    this.descr = descr;
   }
   toJSON() {
     return {
@@ -15,6 +16,7 @@ class Notebook {
       title: this.title,
       price: this.price,
       img: this.img,
+      descr: this.descr,
     };
   }
   // save method - saqlash
@@ -51,6 +53,12 @@ class Notebook {
         }
       );
     });
+  }
+
+  static async getById(id) {
+    const notebooks = await Notebook.getAll()
+    return notebooks.find(item => item.id === id)
+
   }
 }
 
