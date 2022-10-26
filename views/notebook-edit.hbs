@@ -1,0 +1,40 @@
+<h4 class="head-text">Edit Notebook {{notebook.title}}</h4>
+
+<form action="/notebooks/edit" method="POST" class="z-depth-4 f_control">
+  <div class="input-field">
+    <input id="title" name="title" type="text" class="validate" value="{{notebook.title}}" required />
+    <label for="title">Notebooks model</label>
+    <span class="helper-text" data-error="Enter Notebooks Name"></span>
+  </div>
+  <div class="input-field">
+    <input
+      id="price"
+      name="price"
+      type="number"
+      class="validate"
+      required
+      min="1"
+      value="{{notebook.price}}"
+    />
+    <label for="price">Price</label>
+    <span class="helper-text" data-error="Enter Price"></span>
+  </div>
+  <div class="input-field">
+    <input id="img" name="img" type="text" class="validate" value="{{notebook.img}}" required />
+    <label for="img">URL Image</label> 
+    <span class="helper-text" data-error="Enter URL Image"></span>
+  </div>
+  <div class="input-field">
+    <input
+      id="descr"
+      name="descr"
+      required
+      class="materizalize-textarea"
+      value="{{notebook.descr}}"
+    />
+    {{!-- <label for="descr">Description</label> --}}
+    <span class="helper-text" data-error="Enter Description"></span>
+  </div>
+  <input type="hidden" name="id" value="{{notebook.id}}">
+  <button class="btn btn-primary">Add Notebooks</button>
+</form>

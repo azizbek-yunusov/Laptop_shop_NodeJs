@@ -19,6 +19,7 @@ class Notebook {
       descr: this.descr,
     };
   }
+
   // save method - saqlash
   async save() {
     const notebooks = await Notebook.getAll();
@@ -56,9 +57,31 @@ class Notebook {
   }
 
   static async getById(id) {
-    const notebooks = await Notebook.getAll()
-    return notebooks.find(item => item.id === id)
+    const notebooks = await Notebook.getAll();
+    return notebooks.find((item) => item.id === id);
+  }
 
+  static async update(notebook) {
+    const notebooks = await Notebook.getAll();
+
+    const idx = notebooks.findIndex((c) => c.id === notebook.id);
+    // massiv qaytaradi
+    notebooks[idx] = notebook;
+
+    // bazaga yangi data jo'natishi uchun yoziladi
+    return new Promise((resolve, reject) => {
+      fs.writeFile(
+        path.join(__dirname, "..", "data", "notebooks.json"),
+        JSON.stringify(notebooks),
+        (err) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
+          }
+        }
+      );
+    });
   }
 }
 
