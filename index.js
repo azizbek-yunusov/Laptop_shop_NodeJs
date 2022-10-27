@@ -4,6 +4,7 @@ const exphbs = require("express-handlebars");
 const homeRoutes = require("./routes/home");
 const addRoutes = require("./routes/add")
 const notebooksRoutes = require("./routes/notebooks")
+const cartRoutes = require("./routes/cart")
 
 const hbs = exphbs.create({
   defaultLayout: "main",
@@ -23,6 +24,7 @@ app.use(express.urlencoded({extended: true}))
 app.use("/", homeRoutes);
 app.use("/notebooks", notebooksRoutes)
 app.use("/add", addRoutes)
+app.use("/cart", cartRoutes)
 
 const PORT = process.env.PORT || 5000;
 

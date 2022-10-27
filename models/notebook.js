@@ -25,6 +25,7 @@ class Notebook {
     const notebooks = await Notebook.getAll();
     notebooks.push(this.toJSON());
     return new Promise((resolve, reject) => {
+      // yozish
       fs.writeFile(
         path.join(__dirname, "..", "data", "notebooks.json"),
         JSON.stringify(notebooks),
@@ -42,6 +43,7 @@ class Notebook {
   // static function
   static getAll() {
     return new Promise((resolve, reject) => {
+      // o'qish
       fs.readFile(
         path.join(__dirname, "..", "data", "notebooks.json"),
         "utf-8",

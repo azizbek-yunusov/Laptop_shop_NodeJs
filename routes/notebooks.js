@@ -5,7 +5,7 @@ const router = Router();
 router.get("/", async (req, res) => {
   const notebooks = await Notebook.getAll();
   res.render("notebooks", { title: "Notebooks", isNotebooks: true, notebooks });
-  console.log(notebooks);
+  // console.log(notebooks);
 });
 
 router.get("/:id/edit", async (req, res) => {
