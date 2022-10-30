@@ -7,14 +7,21 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const notebook = new Notebook(
-    req.body.title,
-    req.body.price,
-    req.body.img,
-    req.body.descr
-  );
-  await notebook.save();
-  res.redirect("/notebooks");
+  // yangi noutbuk qo'shish
+  const notebook = new Notebook({
+    title: req.body.title,
+    price: req.body.price,
+    img: req.body.img,
+    descr: req.body.descr,
+    userId: req.user,
+  });
+  try {
+    // save() - mongoDb dan keladigan method
+    await notebook.save();
+    res.redirect("/notebooks");
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 module.exports = router;

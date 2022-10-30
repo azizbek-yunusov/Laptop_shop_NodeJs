@@ -1,1 +1,41 @@
 <h4 class="">Basket</h4>
+<div id="cart">
+
+  {{#if notebooks.length}}
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Quantity</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each notebooks}}
+          <tr>
+            <td>{{title}}</td>
+            <td>{{count}}</td>
+            <td>
+              <button class="btn btn-small js-remove" data-id="{{id}}">
+                delete
+              </button>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    <h4 class="">
+      <b>
+        price:
+      </b>
+      <span class="price">
+        {{price}}
+      </span>
+    </h4>
+  {{else}}
+    <p class="">
+      Basket is empty
+    </p>
+  {{/if}}
+</div>

@@ -1,8 +1,15 @@
-<h4 class="head-text">Edit Notebook {{notebook.title}}</h4>
+<h4 class="head-text">Edit Notebook {{editNotebook.title}}</h4>
 
 <form action="/notebooks/edit" method="POST" class="z-depth-4 f_control">
   <div class="input-field">
-    <input id="title" name="title" type="text" class="validate" value="{{notebook.title}}" required />
+    <input
+      id="title"
+      name="title"
+      type="text"
+      class="validate"
+      value="{{editNotebook.title}}"
+      required
+    />
     <label for="title">Notebooks model</label>
     <span class="helper-text" data-error="Enter Notebooks Name"></span>
   </div>
@@ -14,14 +21,21 @@
       class="validate"
       required
       min="1"
-      value="{{notebook.price}}"
+      value="{{editNotebook.price}}"
     />
     <label for="price">Price</label>
     <span class="helper-text" data-error="Enter Price"></span>
   </div>
   <div class="input-field">
-    <input id="img" name="img" type="text" class="validate" value="{{notebook.img}}" required />
-    <label for="img">URL Image</label> 
+    <input
+      id="img"
+      name="img"
+      type="text"
+      class="validate"
+      value="{{editNotebook.img}}"
+      required
+    />
+    <label for="img">URL Image</label>
     <span class="helper-text" data-error="Enter URL Image"></span>
   </div>
   <div class="input-field">
@@ -30,11 +44,16 @@
       name="descr"
       required
       class="materizalize-textarea"
-      value="{{notebook.descr}}"
+      value="{{editNotebook.descr}}"
     />
-    {{!-- <label for="descr">Description</label> --}}
+    {{! <label for="descr">Description</label> }}
     <span class="helper-text" data-error="Enter Description"></span>
   </div>
-  <input type="hidden" name="id" value="{{notebook.id}}">
+  <input type="hidden" name="id" value="{{editNotebook.id}}" />
   <button class="btn btn-primary">Add Notebooks</button>
+</form>
+
+<form action="/notebooks/remove" method="POST">
+  <input type="hidden" name="id" value="{{editNotebook.id}}" />
+  <button class="btn red mt-2">Remove Notebook </button>
 </form>
