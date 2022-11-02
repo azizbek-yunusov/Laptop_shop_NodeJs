@@ -19,8 +19,16 @@ const notebook = new Schema({
   },
   userId: {
     type: Schema.Types.ObjectId,
-    ref: "User"
-  }
+    ref: "User",
+  },
+});
+
+notebook.method("toClient", function () {
+  const notebook = this.toObject();
+  notebook.id = notebook._id;
+  delete notebook._id;
+
+  return notebook;
 });
 
 module.exports = model("Notebook", notebook);

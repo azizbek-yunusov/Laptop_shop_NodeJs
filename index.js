@@ -10,6 +10,7 @@ const homeRoutes = require("./routes/home");
 const addRoutes = require("./routes/add");
 const notebooksRoutes = require("./routes/notebooks");
 const cartRoutes = require("./routes/cart");
+const ordersRoutes = require("./routes/orders")
 
 const User = require("./models/user");
 
@@ -25,7 +26,7 @@ app.set("views", "views");
 
 app.use(async (req, res, next) => {
   try {
-    const user = await User.findById("635ea104dc891c05c2837639");
+    const user = await User.findById("63616427125c918a8e6077d8");
     req.user = user;
     next();
   } catch (err) {
@@ -43,6 +44,7 @@ app.use("/", homeRoutes);
 app.use("/notebooks", notebooksRoutes);
 app.use("/add", addRoutes);
 app.use("/cart", cartRoutes);
+app.use("/orders", ordersRoutes)
 
 async function start() {
   try {

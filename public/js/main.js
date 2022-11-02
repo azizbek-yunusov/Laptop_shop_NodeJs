@@ -33,6 +33,20 @@ const toCurrency = (price) => {
   }).format(price);
 };
 
+const toDate = (date) => {
+  return new Intl.DateTimeFormat("us-US", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  }).format(new Date(date));
+};
+
+document.querySelectorAll(".data").forEach((s) => {
+  s.textContent = toDate(s.textContent);
+});
 document.querySelectorAll(".price").forEach((c) => {
   c.textContent = toCurrency(c.textContent);
 });

@@ -13,7 +13,7 @@ const userSchema = new Schema({
     items: [
       {
         count: {
-          type: String,
+          type: Number,
           required: true,
           default: 1,
         },
@@ -30,8 +30,8 @@ const userSchema = new Schema({
 
 userSchema.methods.addToCart = function (notebook) {
   let items = [...this.cart.items];
-  const index = items.findIndex((item) => {
-    return item.notebookId.toString() === notebook._id.toString();
+  const index = items.findIndex((s) => {
+    return s.notebookId.toString() === notebook._id.toString();
   });
 
   if (index >= 0) {
@@ -43,8 +43,30 @@ userSchema.methods.addToCart = function (notebook) {
     });
   }
 
-  this.cart = { items };
+  // const newCart = { items: items };
+  // this.cart = newCart;
 
-  return this.save()
+  this.cart = { items };
+  return this.save();
 };
+userSchema.methods.removeFromCart = function (id) {
+  let items = [...this.cart.items];
+  const index = items.findIndex(
+    (s) => s.notebookId.toString() === id.toString()
+  );
+
+  if (items[index].count === 1) {
+    items = items.filter((s) => s.notebookId.toString() !== id.toString());
+  } else {
+    items[index].count--;
+  }
+  this.cart = { items };
+  return this.save();
+};
+
+userSchema.methods.cleanCart = function () {
+  this.cart = { items: [] };
+  return this.save();
+};
+
 module.exports = model("User", userSchema);

@@ -15,7 +15,6 @@ class Cart {
 
     const idx = cart.notebooks.findIndex((c) => c.id === notebook.id);
     const candidate = cart.notebooks[idx];
-    console.log(candidate);
     if (candidate) {
       // buyni har bosganda qiymati 1 ga oshib boradi
       candidate.count++;

@@ -7,7 +7,6 @@ router.get("/", async (req, res) => {
   // notebooksda massiv qaytaradi
   // const notebooks = await Notebook.getAll();
   const notebooks = await Notebook.find().populate("userId", "email name");
-  console.log(notebooks);
   res.render("notebooks", { title: "Notebooks", isNotebooks: true, notebooks });
   // console.log(notebooks);
 });
