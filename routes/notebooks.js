@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const authMiddleware = require("../middleware/auth");
 const Notebook = require("../models/notebook");
 const router = Router();
 
@@ -13,7 +14,7 @@ router.get("/", async (req, res) => {
 
 //! NOTEBOOKNI "EDIT" QILISH
 // edit bosilgandagi holat "GET"
-router.get("/:id/edit", async (req, res) => {
+router.get("/:id/edit", authMiddleware, async (req, res) => {
   if (!req.query.allow) {
     return res.redirect("/");
   }
@@ -37,7 +38,7 @@ router.post("/remove", async (req, res) => {
 });
 
 // "ADD NOTEBOOKS" bosilgandagi jarayon "POST" o'zgartish
-router.post("/edit", async (req, res) => {
+router.post("/edit", authMiddleware, async (req, res) => {
   // update() - models/notebook.js dan keladigan class method
   await Notebook.findByIdAndUpdate(req.body.id, req.body);
   res.redirect("/notebooks");

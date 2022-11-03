@@ -12,9 +12,11 @@
   "license": "ISC",
   "dependencies": {
     "@handlebars/allow-prototype-access": "^1.0.5",
+    "connect-mongodb-session": "^3.1.1",
     "express": "^4.18.2",
     "express-handlebars": "^6.0.6",
     "express-hbs": "^2.4.0",
+    "express-session": "^1.17.3",
     "mongoose": "^6.7.0",
     "uuid": "^9.0.0"
   },
