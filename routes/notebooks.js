@@ -5,11 +5,19 @@ const router = Router();
 
 //! BARCHA NOTEBOOKLARNI OLISH "GET"
 router.get("/", async (req, res) => {
-  // notebooksda massiv qaytaradi
-  // const notebooks = await Notebook.getAll();
-  const notebooks = await Notebook.find().populate("userId", "email name");
-  res.render("notebooks", { title: "Notebooks", isNotebooks: true, notebooks });
-  // console.log(notebooks);
+  try {
+    // notebooksda massiv qaytaradi
+    // const notebooks = await Notebook.getAll();
+    const notebooks = await Notebook.find().populate("userId", "email name");
+    res.render("notebooks", {
+      title: "Notebooks",
+      isNotebooks: true,
+      userId: req.user ? req.user._id.toString() : null,
+      notebooks,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 //! NOTEBOOKNI "EDIT" QILISH
@@ -18,12 +26,19 @@ router.get("/:id/edit", authMiddleware, async (req, res) => {
   if (!req.query.allow) {
     return res.redirect("/");
   }
-  const editNotebook = await Notebook.findById(req.params.id);
-  res.render("notebook-edit", {
-    title: `Edit ${editNotebook.title}`,
-    editNotebook,
-  });
-  // renderni ichidagi editNotebook edit formaga jo'natiladi
+  try {
+    const editNotebook = await Notebook.findById(req.params.id);
+    // if(notebook.userId.toString() !== req.user._id.toString()) {
+    //   return res.redirect
+    // }
+    res.render("notebook-edit", {
+      title: `Edit ${editNotebook.title}`,
+      editNotebook,
+    });
+    // renderni ichidagi editNotebook edit formaga jo'natiladi
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 //! DELETE qilish

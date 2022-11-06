@@ -5,10 +5,9 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  name: {
-    type: String,
-    required: true,
-  },
+  name: String,
+  password: String, 
+  avatarUrl: String, 
   cart: {
     items: [
       {

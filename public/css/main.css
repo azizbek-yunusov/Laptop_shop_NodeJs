@@ -70,3 +70,10 @@
   font-size: 30px;
   text-align: center;
 }
+.alert {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  text-align: center;
+  margin-bottom: 1rem;
+  background-color: rgb(255, 81, 1);
+}

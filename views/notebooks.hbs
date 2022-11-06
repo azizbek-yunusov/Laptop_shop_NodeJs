@@ -16,7 +16,9 @@
           <a href="/notebooks/{{id}}" target="_blank">Detail</a>
           {{! query search  }}
           {{#if @root.isAuth}}
-            <a href="/notebooks/{{id}}/edit?allow=true">Edit</a>
+             {{#ifeq userId._id @root.userId}} 
+              <a href="/notebooks/{{id}}/edit?allow=true">Edit</a>
+            {{/ifeq}}
             <form action="/cart/add" method="POST">
               <input type="hidden" name="id" value="{{id}}" />
               <button type="submit" class="btn btn-primary">Buy</button>

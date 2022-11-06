@@ -37,7 +37,7 @@ router.post("/", async (req, res) => {
       notebooks,
     });
     await order.save();
-    console.log(order);
+    // console.log(order);
     await req.user.cleanCart();
     res.redirect("/orders");
   } catch (err) {

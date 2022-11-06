@@ -6,6 +6,9 @@
     </ul>
   </div>
   <div id="login" class="col s6 offset-s3">
+    {{#if loginError}}
+      <p class="alert ">{{loginError}}</p>
+    {{/if}}
     <h4 class="">Log in notebook store</h4>
     <form action="/auth/login" method="POST" class="z-depth-4 f_control">
       <div class="input-field">
@@ -29,23 +32,37 @@
     </form>
   </div>
   <div id="register" class="col s6 offset-s3">
+    {{#if error}}
+      <p class="alert ">{{error}}</p>
+    {{/if}}
     <h4 class="">Create account</h4>
     <form action="/auth/register" method="POST" class="z-depth-4 f_control">
+    <div class="input-field">
+        <input
+          id="name"
+          name="name"
+          type="text"
+          class="validate"
+          required
+        />
+        <label for="name">Enter your name</label>
+        <span class="helper-text" data-error="Email your name"></span>
+      </div>
       <div class="input-field">
         <input
           id="remail"
-          name="remail"
+          name="email"
           type="email"
           class="validate"
           required
         />
-        <label for="remail">Email your email</label>
+        <label for="remail">Enter your email</label>
         <span class="helper-text" data-error="Email your email"></span>
       </div>
       <div class="input-field">
         <input
           id="rpassword"
-          name="rpassword"
+          name="password"
           type="password"
           class="validate"
           required

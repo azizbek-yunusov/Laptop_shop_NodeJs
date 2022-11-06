@@ -7,6 +7,7 @@ const {
 } = require("@handlebars/allow-prototype-access");
 const exphbs = require("express-handlebars");
 const session = require("express-session");
+const flash = require("connect-flash")
 // faqat session funksiyasi kerak
 const MongoStore = require("connect-mongodb-session")(session);
 
@@ -16,8 +17,10 @@ const notebooksRoutes = require("./routes/notebooks");
 const cartRoutes = require("./routes/cart");
 const ordersRoutes = require("./routes/orders");
 const authRoutes = require("./routes/auth");
+const profileRoutes = require("./routes/profile")
 
 const varMiddleware = require("./middleware/var");
+const userMiddleware = require("./middleware/user")
 
 // db url
 const MONGODB_URI =
@@ -28,6 +31,7 @@ const MONGODB_URI =
 const hbs = exphbs.create({
   defaultLayout: "main",
   extname: "hbs",
+  helpers: require("./utils"),
   handlebars: allowInsecurePrototypeAccess(Handlebars),
 });
 // mongostore
@@ -67,7 +71,10 @@ app.use(
   })
 );
 
+app.use(flash())
+// global middleware
 app.use(varMiddleware);
+app.use(userMiddleware)
 // Routes
 app.use("/", homeRoutes);
 app.use("/notebooks", notebooksRoutes);
@@ -75,6 +82,7 @@ app.use("/add", addRoutes);
 app.use("/cart", cartRoutes);
 app.use("/orders", ordersRoutes);
 app.use("/auth", authRoutes);
+app.use("/profile", profileRoutes)
 
 async function start() {
   try {
